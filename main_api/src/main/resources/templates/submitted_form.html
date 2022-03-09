@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Successfully Submitted</title>
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
+</head>
+<body>
+    <div id="name">
+        <label>First Name:
+            <input type="hidden" th:text="${form.getFirstName()}">
+        </label>
+        <label>Last Name:
+            <input type="hidden" th:text="${form.getLastName()}">
+        </label>
+    </div>
+    <div id="department-info">
+        <label>Department:
+            <input type="hidden" th:text="${form.getDepartment()}">
+        </label>
+        <label>Supervisor:
+            <input type="hidden" th:text="${form.getSupervisor()}">
+        </label>
+    </div>
+    <div id="form-input">
+        <label>Category:
+            <input type="hidden" th:text="${form.getRequestTopic()}">
+        </label>
+        <label>Reason:
+            <input type="hidden" th:text="${form.getRequestReason()}">
+        </label>
+        <label>Cost:
+            <input type="hidden" th:text="${form.getCost()}">
+        </label>
+    </div>
+</body>
+</html>

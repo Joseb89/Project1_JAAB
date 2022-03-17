@@ -10,9 +10,8 @@ import java.util.Date;
 @Getter
 @Setter
 public class FormDTO {
-
-    private int formID;
-    private int employeeID;
+    private Integer formId;
+    private Integer employeeId;
     private String firstName;
     private String lastName;
     private Department department;
@@ -22,5 +21,4 @@ public class FormDTO {
     private String requestReason;
     private double cost;
     private Status requestStatus;
-
 }

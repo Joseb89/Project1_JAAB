@@ -9,13 +9,12 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table(name = "forms", schema = "reimburse")
+@Table(name = "forms")
 public class Form {
-
     @Id
-    @Column(name = "form_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int formID;
+    @Column(name = "form_id", nullable = false)
+    private Integer formId;
 
     @ManyToOne
     @JoinColumn(name = "employee_id", nullable = false)
@@ -49,5 +48,4 @@ public class Form {
     @Column(name = "request_status")
     @Enumerated(EnumType.STRING)
     private Status requestStatus;
-
 }

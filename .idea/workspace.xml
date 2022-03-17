@@ -4,11 +4,38 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6a7fe580-2815-4a47-b9d4-7da17b679e78" name="Changes" comment="" />
+    <list default="true" id="6a7fe580-2815-4a47-b9d4-7da17b679e78" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/main_api/src/main/java/com/jaab/revature/controller/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_api/src/main/resources/templates/employee_forms.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_api/src/main/resources/templates/new_user.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_api/src/main/resources/templates/user_success.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/email_api/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/email_api/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/email_api/src/main/java/com/revature/jaab/EmailApiApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/email_api/src/main/java/com/revature/jaab/EmailApiApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_api/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/main_api/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_api/src/main/java/com/jaab/revature/MainApiApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/main_api/src/main/java/com/jaab/revature/MainApiApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_api/src/main/java/com/jaab/revature/controller/FormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/main_api/src/main/java/com/jaab/revature/controller/FormController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_api/src/main/java/com/jaab/revature/controller/MainController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_api/src/main/java/com/jaab/revature/dao/FormRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/main_api/src/main/java/com/jaab/revature/dao/FormRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_api/src/main/java/com/jaab/revature/dao/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/main_api/src/main/java/com/jaab/revature/dao/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_api/src/main/java/com/jaab/revature/dto/FormDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/main_api/src/main/java/com/jaab/revature/dto/FormDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_api/src/main/java/com/jaab/revature/dto/LoginDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/main_api/src/main/java/com/jaab/revature/dto/LoginDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_api/src/main/java/com/jaab/revature/dto/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/main_api/src/main/java/com/jaab/revature/dto/UserDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_api/src/main/java/com/jaab/revature/model/Form.java" beforeDir="false" afterPath="$PROJECT_DIR$/main_api/src/main/java/com/jaab/revature/model/Form.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_api/src/main/java/com/jaab/revature/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/main_api/src/main/java/com/jaab/revature/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_api/src/main/java/com/jaab/revature/service/FormService.java" beforeDir="false" afterPath="$PROJECT_DIR$/main_api/src/main/java/com/jaab/revature/service/FormService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_api/src/main/java/com/jaab/revature/service/LoginService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_api/src/main/java/com/jaab/revature/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/main_api/src/main/java/com/jaab/revature/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_api/src/main/resources/static/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/main_api/src/main/resources/static/css/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_api/src/main/resources/templates/form.html" beforeDir="false" afterPath="$PROJECT_DIR$/main_api/src/main/resources/templates/form.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -37,10 +64,24 @@
       <option name="presentableId" value="Default" />
       <updated>1646843161721</updated>
       <workItem from="1646843166302" duration="209000" />
+      <workItem from="1646857865726" duration="219000" />
+      <workItem from="1647051639120" duration="23000" />
+      <workItem from="1647530908261" duration="15000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

@@ -1,17 +1,16 @@
 package com.jaab.revature.dto;
 
-import com.jaab.revature.model.Role;
+import com.jaab.revature.model.Department;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 public class UserDTO {
-
-    private int employee_id;
+    private Integer employeeId;
     private String firstName;
     private String lastName;
     private String email;
-    private String password;
-    private Role role;
+    private Department department;
+    private String supervisor;
 }

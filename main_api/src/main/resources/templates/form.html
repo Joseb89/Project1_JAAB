@@ -6,8 +6,7 @@
     <link th:href="@{/css/styles.css}" rel="stylesheet">
 </head>
 <body>
-<!--/*@thymesVar id="form" type="com.jaab.revature.model.Form"*/-->
-<form action="#" th:action="@{/employees/{id}(id=${form.getEmployee().getEmployee_id()})}"
+<form action="#" th:action="@{/employee/{id}(id=${form.getEmployee().getEmployeeId()})}"
       th:object="${form}" method="post">
     <div id="name">
       <label>First Name:

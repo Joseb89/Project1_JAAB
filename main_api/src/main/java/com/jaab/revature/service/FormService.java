@@ -12,11 +12,12 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-public class FormService{
+public class FormService {
 
     private FormRepository formRepository;
     private UserService userService;
@@ -31,54 +32,52 @@ public class FormService{
         this.userService = userService;
     }
 
-    public void loadForm(Form obj, Integer id){
+    public void loadForm(Form form, Integer id) {
         User user = userService.getUserById(id);
-        obj.setEmployee(user);
-        BeanUtils.copyProperties(user, obj);
-    }
-    public Integer createForm(Form obj, Integer id){
-        loadForm(obj, id);
-        obj.setRequestDate(new Timestamp(System.currentTimeMillis()));
-        obj.setRequestStatus(Status.PENDING);
-        formRepository.save(obj);
-        return obj.getFormID();
+        form.setEmployee(user);
+        BeanUtils.copyProperties(user, form);
     }
 
-    public FormDTO getFormByID (Integer id){
-        Form getForm = formRepository.getFormByFormID(id);
-        return copyFormToDTO(getForm);
-    }
-
-    public Set<FormDTO> getFormsByEmployeeID (Integer employeeId) {
-        Set<Form> forms = formRepository.getFormsByEmployeeID(employeeId);
-
-        return forms.stream()
-                .map(this::copyFormToDTO)
-                .collect(Collectors.toSet());
+    public Integer createForm(Form form, Integer id){
+        loadForm(form, id);
+        form.setRequestDate(new Timestamp(System.currentTimeMillis()));
+        form.setRequestStatus(Status.PENDING);
+        formRepository.save(form);
+        return form.getFormId();
     }
 
     public Set<FormDTO> getAllForms(){
-        List<Form> forms = formRepository.findAll(Sort.by("formID"));
+        List<Form> forms = formRepository.findAll(Sort.by("formId"));
 
         return forms.stream()
-                .map(this::copyFormToDTO)
+                .map(this::copyToDTO)
                 .collect(Collectors.toSet());
     }
 
-    public FormDTO updateStatus(Integer id, Status status){
-        Form form = formRepository.getFormByFormID(id);
-        FormDTO formDTO = copyFormToDTO(form);
-        formRepository.updateStatus(id, status);
-        formDTO.setRequestStatus(status);
-        return formDTO;
+    public FormDTO getFormById(Integer id){
+        Form form = formRepository.getById(id);
+        return copyToDTO(form);
     }
 
-    private FormDTO copyFormToDTO(Form form) {
+    public Set<FormDTO> getFormsByEmployeeId(Integer id) {
+        List<Form> forms = formRepository.findAll(Sort.by("formId"));
+
+        return forms.stream()
+                .filter(form -> Objects.equals(form.getEmployee().getEmployeeId(), id))
+                .map(this::copyToDTO)
+                .collect(Collectors.toSet());
+    }
+
+    public void updateStatus(Integer id, Status status){
+        Form form = formRepository.getById(id);
+        FormDTO formDTO = copyToDTO(form);
+        formRepository.updateStatus(formDTO.getFormId(), status);
+    }
+
+    private FormDTO copyToDTO(Form form) {
         FormDTO formDTO = new FormDTO();
-        formDTO.setFormID(form.getFormID());
-        formDTO.setEmployeeID(form.getEmployee().getEmployee_id());
         BeanUtils.copyProperties(form, formDTO);
+        formDTO.setEmployeeId(form.getEmployee().getEmployeeId());
         return formDTO;
     }
-
 }

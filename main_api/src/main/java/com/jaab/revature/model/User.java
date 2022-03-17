@@ -6,16 +6,16 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.Set;
 
+
 @Getter
 @Setter
 @Entity
 @Table(name = "users", schema = "reimburse")
 public class User {
-
     @Id
-    @Column(name = "employee_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int employee_id;
+    @Column(name = "employee_id", nullable = false)
+    private Integer employeeId;
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
@@ -43,5 +43,3 @@ public class User {
     @OneToMany(mappedBy = "employee")
     private Set<Form> forms;
 }
-
-

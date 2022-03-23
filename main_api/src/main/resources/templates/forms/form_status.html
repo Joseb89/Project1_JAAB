@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Status</title>
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
+</head>
+<body>
+<div>
+    <h1>Form Status</h1>
+</div>
+<div>
+    <input type="hidden" th:text="|Form No. ${formDTO.getFormId()} has been ${formDTO.getRequestStatus()}|">
+</div>
+</body>
+</html>

@@ -6,9 +6,7 @@
     <link th:href="@{/css/styles.css}" rel="stylesheet">
 </head>
 <body>
-<!--/*@thymesVar id="formDTO" type="com.jaab.revature.dto.FormDTO"*/-->
-<form action="#" th:action="@{/admin/{id}(id=${formDTO.formID})}" th:object="${formDTO}" th:method="PATCH">
-    <input type="hidden" name="_method" value="patch" />
+<form th:action="@{/admin/approveForm/{id}(id=${formDTO.getFormId()})}" th:method="PATCH">
     <div id="name">
         <label>First Name:
             <input type="hidden" th:text="${formDTO.getFirstName()}">
@@ -36,9 +34,9 @@
             <input type="hidden" th:text="${formDTO.getCost()}">
         </label>
         <label>Approve?
-            <select th:field="*{requestStatus}">
-                <option th:value="'APPROVED'">APPROVED</option>
-                <option th:value="'DENIED'">DENIED</option>
+            <select th:field="*{formDTO.requestStatus}">
+                <option th:value="${T(com.jaab.revature.model.Status).APPROVED}">APPROVED</option>
+                <option th:value="${T(com.jaab.revature.model.Status).DENIED}">DENIED</option>
             </select>
         </label>
         <button type="submit">Submit</button>

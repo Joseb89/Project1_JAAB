@@ -10,5 +10,3 @@ create table if not exists reimburse.users (
 );
 
 select * from reimburse.users u;
-
-drop table reimburse.users;

@@ -24,6 +24,10 @@ label {
     margin: 2rem;
 }
 
+table {
+    text-align: center;
+}
+
 #form-input {
     flex-direction: column;
     align-items: center;

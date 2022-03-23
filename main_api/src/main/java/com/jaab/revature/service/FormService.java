@@ -3,16 +3,14 @@ package com.jaab.revature.service;
 import com.jaab.revature.dao.FormRepository;
 import com.jaab.revature.dto.FormDTO;
 import com.jaab.revature.model.Form;
+import com.jaab.revature.model.Role;
 import com.jaab.revature.model.Status;
 import com.jaab.revature.model.User;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -34,6 +32,10 @@ public class FormService {
 
     public void loadForm(Form form, Integer id) {
         User user = userService.getUserById(id);
+
+        if (user.getRole() == Role.ROLE_ADMIN)
+            throw new RuntimeException("Admin users cannot submit forms.");
+
         form.setEmployee(user);
         BeanUtils.copyProperties(user, form);
     }
@@ -46,38 +48,27 @@ public class FormService {
         return form.getFormId();
     }
 
-    public Set<FormDTO> getAllForms(){
-        List<Form> forms = formRepository.findAll(Sort.by("formId"));
-
-        return forms.stream()
-                .map(this::copyToDTO)
-                .collect(Collectors.toSet());
-    }
-
     public FormDTO getFormById(Integer id){
         Form form = formRepository.getById(id);
         return copyToDTO(form);
     }
 
-    public Set<FormDTO> getFormsByEmployeeId(Integer id) {
-        List<Form> forms = formRepository.findAll(Sort.by("formId"));
+    public Set<FormDTO> getFormsByEmployeeId(Integer employeeId) {
+        Set<Form> forms = formRepository.getAllUnapprovedRequests(employeeId);
 
         return forms.stream()
-                .filter(form -> Objects.equals(form.getEmployee().getEmployeeId(), id))
                 .map(this::copyToDTO)
                 .collect(Collectors.toSet());
     }
 
     public void updateStatus(Integer id, Status status){
-        Form form = formRepository.getById(id);
-        FormDTO formDTO = copyToDTO(form);
-        formRepository.updateStatus(formDTO.getFormId(), status);
+        formRepository.updateStatus(id, status);
     }
 
     private FormDTO copyToDTO(Form form) {
         FormDTO formDTO = new FormDTO();
-        BeanUtils.copyProperties(form, formDTO);
         formDTO.setEmployeeId(form.getEmployee().getEmployeeId());
+        BeanUtils.copyProperties(form, formDTO);
         return formDTO;
     }
 }

@@ -1,12 +1,11 @@
 package com.jaab.revature.controller;
 
 import com.jaab.revature.dto.FormDTO;
+import com.jaab.revature.dto.UserDTO;
 import com.jaab.revature.model.Form;
-import com.jaab.revature.model.Status;
 import com.jaab.revature.model.User;
 import com.jaab.revature.service.FormService;
 import com.jaab.revature.service.UserService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -38,7 +37,7 @@ public class FormController {
         Form form = new Form();
         formService.loadForm(form, employeeId);
         model.addAttribute("form", form);
-        return "form";
+        return "forms/form";
     }
 
     @PostMapping("employee/{employeeId}")
@@ -46,32 +45,36 @@ public class FormController {
         int id = formService.createForm(form, employeeId);
         FormDTO formDTO = formService.getFormById(id);
         sendEmail(formDTO, "/admin/email");
-        return "submitted_form";
+        return "forms/submitted_form";
+    }
+
+    @GetMapping("/admin/{employeeId}")
+    public String loadAdminHome(Model model, @PathVariable Integer employeeId) {
+        User admin = userService.getUserById(employeeId);
+        Set<UserDTO> employees = userService.getUsersBySupervisor(admin.getFirstName() + " " + admin.getLastName());
+        model.addAttribute("employees", employees);
+        return "users/admin_home";
     }
 
     @GetMapping("/admin/forms/{employeeId}")
     public String getFormsByEmployeeId(Model model, @PathVariable Integer employeeId){
-        User user = userService.getUserById(employeeId);
         Set<FormDTO> forms = formService.getFormsByEmployeeId(employeeId);
-        model.addAttribute("user", user);
         model.addAttribute("forms", forms);
-        return "employee_forms";
+        return "forms/employee_forms";
     }
 
-    @GetMapping("/admin/{formId}")
+    @GetMapping("/admin/approveForm/{formId}")
     public String formStatus(Model model, @PathVariable Integer formId){
         FormDTO formDTO = formService.getFormById(formId);
         model.addAttribute("formDTO", formDTO);
-        return "approve_form";
+        return "forms/approve_form";
     }
 
-    @PatchMapping("/admin/{formId}")
-    public String updateForm(@ModelAttribute("formDTO") FormDTO formDTO, @PathVariable Integer formId, Status status) {
-        FormDTO displayForm = formService.getFormById(formId);
-        BeanUtils.copyProperties(displayForm, formDTO);
-        formService.updateStatus(displayForm.getFormId(), status);
+    @PatchMapping("/admin/approveForm/{formId}")
+    public String updateForm(@ModelAttribute("formDTO") FormDTO formDTO, @PathVariable Integer formId) {
+        formService.updateStatus(formId, formDTO.getRequestStatus());
         sendEmail(formDTO, "/employee/email");
-        return "form_status";
+        return "forms/form_status";
     }
 
 

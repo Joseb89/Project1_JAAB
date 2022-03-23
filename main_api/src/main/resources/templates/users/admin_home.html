@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Select Employee</title>
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
+</head>
+<body>
+<form method="get">
+    <h1>Select Employee</h1>
+    <table>
+        <tr>
+            <th>Forms</th>
+        </tr>
+        <tr th:each="employee: ${employees}">
+            <td><a th:href="@{/admin/forms/{id}(id=${employee.getEmployeeId()})}"
+                   th:value="${employee.getEmployeeId()}"
+                   th:text="|${employee.getFirstName()} ${employee.getLastName()}|"></a></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

@@ -1,5 +1,6 @@
 package com.jaab.revature.controller;
 
+import com.jaab.revature.dto.UserDTO;
 import com.jaab.revature.model.Role;
 import com.jaab.revature.model.User;
 import com.jaab.revature.service.UserService;
@@ -9,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.Set;
 
 @Controller
 public class UserController {
@@ -22,14 +25,15 @@ public class UserController {
 
     @GetMapping("/newUser")
     public String loadNewUser(Model model){
-        User user = new User();
-        model.addAttribute("user", user);
-        return "new_user";
+        Set<UserDTO> adminUsers = userService.getAdminUsers();
+        model.addAttribute("user", new User());
+        model.addAttribute("adminUsers", adminUsers);
+        return "users/new_user";
     }
 
     @PostMapping("/newUser")
     public String createNewUser(@ModelAttribute User user, Role role){
         userService.createUser(user, role);
-        return "user_success";
+        return "users/user_success";
     }
 }

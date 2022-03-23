@@ -32,7 +32,12 @@
                 </select>
             </label>
             <label>
-                <input type="text" placeholder="Supervisor" maxlength="50" th:field="*{user.supervisor}">
+                <select th:field="*{user.supervisor}">
+                    <option value="">Supervisor</option>
+                    <option th:each="admins : ${adminUsers}"
+                            th:value="|${admins.getFirstName()} ${admins.getLastName()}|"
+                            th:text="|${admins.getFirstName()} ${admins.getLastName()}|"></option>
+                </select>
             </label>
             <label>
                 <select th:field="*{user.role}">

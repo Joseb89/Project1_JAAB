@@ -6,32 +6,34 @@
     <link th:href="@{/css/styles.css}" rel="stylesheet">
 </head>
 <body>
+<form th:action="@{/employee/submittedForm/{id}(id=${formDTO.getFormId()})}" method="get">
     <div id="name">
         <label>First Name:
-            <input type="hidden" th:text="${form.getFirstName()}">
+            <input type="hidden" th:text="${formDTO.getFirstName()}">
         </label>
         <label>Last Name:
-            <input type="hidden" th:text="${form.getLastName()}">
+            <input type="hidden" th:text="${formDTO.getLastName()}">
         </label>
     </div>
     <div id="department-info">
         <label>Department:
-            <input type="hidden" th:text="${form.getDepartment()}">
+            <input type="hidden" th:text="${formDTO.getDepartment()}">
         </label>
         <label>Supervisor:
-            <input type="hidden" th:text="${form.getSupervisor()}">
+            <input type="hidden" th:text="${formDTO.getSupervisor()}">
         </label>
     </div>
     <div id="form-input">
         <label>Category:
-            <input type="hidden" th:text="${form.getRequestTopic()}">
+            <input type="hidden" th:text="${formDTO.getRequestTopic()}">
         </label>
         <label>Reason:
-            <input type="hidden" th:text="${form.getRequestReason()}">
+            <input type="hidden" th:text="${formDTO.getRequestReason()}">
         </label>
         <label>Cost:
-            <input type="hidden" th:text="${form.getCost()}">
+            <input type="hidden" th:text="${formDTO.getCost()}">
         </label>
     </div>
+</form>
 </body>
 </html>

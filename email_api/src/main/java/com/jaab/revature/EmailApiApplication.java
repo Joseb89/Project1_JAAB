@@ -1,4 +1,4 @@
-package com.revature.jaab;
+package com.jaab.revature;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

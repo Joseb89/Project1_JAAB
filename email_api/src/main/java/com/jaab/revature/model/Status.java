@@ -1,4 +1,4 @@
-package com.revature.jaab.model;
+package com.jaab.revature.model;
 
 public enum Status {
 

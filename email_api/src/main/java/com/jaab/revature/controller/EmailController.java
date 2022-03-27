@@ -1,7 +1,7 @@
-package com.revature.jaab.controller;
+package com.jaab.revature.controller;
 
-import com.revature.jaab.dto.FormDTO;
-import com.revature.jaab.service.EmailService;
+import com.jaab.revature.dto.FormDTO;
+import com.jaab.revature.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.web.bind.annotation.PostMapping;

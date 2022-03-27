@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Service
@@ -43,6 +44,17 @@ public class UserService {
 
     public Set<UserDTO> getAdminUsers() {
         return getUsersByRole(Role.ROLE_ADMIN);
+    }
+
+    public UserDTO getAdminByEmployeeId(Integer id) {
+        User user = getUserById(id);
+        String supervisor = user.getSupervisor();
+
+        String[] name = supervisor.split(" ");
+
+        User admin = userRepository.getUserByFirstNameAndLastName(name[0], name[1]);
+
+        return copyToDTO(admin);
     }
 
     private Set<UserDTO> getAllEmployees() {

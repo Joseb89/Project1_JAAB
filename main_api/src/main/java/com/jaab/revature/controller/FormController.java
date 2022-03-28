@@ -54,8 +54,7 @@ public class FormController {
 
     @GetMapping("employee/submittedForm/{formId}")
     public String submitForm(Model model, @PathVariable Integer formId) {
-        FormDTO formDTO = formService.getFormById(formId);
-        model.addAttribute("formDTO", formDTO);
+        showForm(formId, model);
         return "forms/submitted_form";
     }
 
@@ -76,14 +75,23 @@ public class FormController {
 
     @GetMapping("admin/approveForm/{formId}")
     public String formStatus(Model model, @PathVariable Integer formId){
-        FormDTO formDTO = formService.getFormById(formId);
-        model.addAttribute("formDTO", formDTO);
+        showForm(formId, model);
         return "forms/approve_form";
     }
 
     @PatchMapping("admin/approveForm/{formId}")
-    public String updateForm(@ModelAttribute("formDTO") FormDTO formDTO, @PathVariable Integer formId) {
+    public ResponseEntity<Mono<FormDTO>> updateForm(HttpServletResponse response,
+                                                    @ModelAttribute("formDTO") FormDTO formDTO,
+                                                    @PathVariable Integer formId) throws IOException {
         formService.updateStatus(formId, formDTO.getRequestStatus());
+        Mono<FormDTO> email = sendEmail(formDTO, "/employee/email");
+        response.sendRedirect("/admin/updatedForm/" + formDTO.getFormId());
+        return ResponseEntity.ok(email);
+    }
+
+    @GetMapping("admin/updatedForm/{formId}")
+    public String getUpdatedForm(Model model, @PathVariable Integer formId){
+        showForm(formId, model);
         return "forms/form_status";
     }
 
@@ -99,5 +107,10 @@ public class FormController {
                 .onStatus(HttpStatus::is4xxClientError,
                         response -> response.bodyToMono(String.class).map(Exception::new))
                 .bodyToMono(FormDTO.class);
+    }
+
+    private void showForm(Integer formId, Model model){
+        FormDTO formDTO = formService.getFormById(formId);
+        model.addAttribute("formDTO", formDTO);
     }
 }

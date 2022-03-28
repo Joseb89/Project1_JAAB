@@ -13,7 +13,8 @@
         </tr>
         <tr th:each="form: ${forms}">
             <td><a th:href="@{/admin/approveForm/{id}(id=${form.getFormId()})}"
-                   th:text="|${form.getRequestReason()}|"></a></td>
+                   th:text="|${form.getFormId()} ${form.getFirstName()} ${form.getLastName()}
+                   ${form.getRequestReason()}|"></a></td>
         </tr>
     </table>
 </form>

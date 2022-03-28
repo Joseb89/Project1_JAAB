@@ -21,5 +21,5 @@ public class FormDTO {
     private String requestTopic;
     private String requestReason;
     private double cost;
-    private Status status;
+    private Status requestStatus;
 }

@@ -39,7 +39,7 @@ public class EmailService {
         mailMessage.setFrom("eldarion1989@gmail.com");
         mailMessage.setSubject("Your Reimbursement Status");
         mailMessage.setText("Your reimbursement for Form No. " + formDTO.getFormId()
-                + " has been " + formDTO.getStatus());
+                + " has been " + formDTO.getRequestStatus());
 
         javaMailSender.send(mailMessage);
 

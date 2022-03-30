@@ -48,7 +48,7 @@ public class FormController {
         int id = formService.createForm(form, employeeId);
         FormDTO formDTO = formService.getFormById(id);
         Mono<FormDTO> email = sendEmail(formDTO, "/admin/email");
-        response.sendRedirect("submittedForm/" + formDTO.getFormId());
+        response.sendRedirect("/employee/submittedForm/" + formDTO.getFormId());
         return ResponseEntity.ok(email);
     }
 
@@ -84,7 +84,8 @@ public class FormController {
                                                     @ModelAttribute("formDTO") FormDTO formDTO,
                                                     @PathVariable Integer formId) throws IOException {
         formService.updateStatus(formId, formDTO.getRequestStatus());
-        Mono<FormDTO> email = sendEmail(formDTO, "/employee/email");
+        FormDTO updatedForm = formService.getFormById(formDTO.getFormId());
+        Mono<FormDTO> email = sendEmail(updatedForm, "/employee/email");
         response.sendRedirect("/admin/updatedForm/" + formDTO.getFormId());
         return ResponseEntity.ok(email);
     }

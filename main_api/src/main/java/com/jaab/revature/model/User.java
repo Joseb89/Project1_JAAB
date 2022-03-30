@@ -2,6 +2,7 @@ package com.jaab.revature.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -11,6 +12,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "users", schema = "reimburse")
+@Proxy(lazy = false)
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

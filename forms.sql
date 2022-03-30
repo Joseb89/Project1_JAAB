@@ -13,5 +13,3 @@ create table if not exists reimburse.forms (
 );
 
 select * from reimburse.forms f;
-
-drop table if exists reimburse.forms;

@@ -2,6 +2,7 @@ package com.jaab.revature.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -10,6 +11,7 @@ import java.util.Date;
 @Setter
 @Entity
 @Table(name = "forms", schema = "reimburse")
+@Proxy(lazy = false)
 public class Form {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

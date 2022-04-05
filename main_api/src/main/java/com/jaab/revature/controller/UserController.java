@@ -23,6 +23,11 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
     @GetMapping("/newUser")
     public String loadNewUser(Model model){
         Set<UserDTO> adminUsers = userService.getAdminUsers();

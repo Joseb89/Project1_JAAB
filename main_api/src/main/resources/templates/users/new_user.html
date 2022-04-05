@@ -7,48 +7,52 @@
 </head>
 <body>
     <form th:action="@{/newUser}" method="post">
-        <div id="name">
-            <label>
-                <input type="text" placeholder="First Name" minlength="2" maxlength="20" th:field="*{user.firstName}">
-            </label>
-            <label>
-                <input type="text" placeholder="Last Name" minlength="2" maxlength="40" th:field="*{user.lastName}">
-            </label>
-        </div>
-        <div id="login">
-            <label>
-                <input type="email" placeholder="Email" th:field="*{user.email}">
-            </label>
-            <label>
-                <input type="text" placeholder="Password" minlength="10" maxlength="100" th:field="*{user.password}">
-            </label>
-        </div>
-        <div id="employee-info">
-            <label>
-                <select th:field="*{user.department}">
-                    <option value="">Department</option>
-                    <option th:each="departments : ${T(com.jaab.revature.model.Department).values()}"
-                    th:value="${departments}" th:text="${departments}"></option>
-                </select>
-            </label>
-            <label>
-                <select th:field="*{user.supervisor}">
-                    <option value="">Supervisor</option>
-                    <option th:each="admins : ${adminUsers}"
-                            th:value="|${admins.getFirstName()} ${admins.getLastName()}|"
-                            th:text="|${admins.getFirstName()} ${admins.getLastName()}|"></option>
-                </select>
-            </label>
-            <label>
-                <select th:field="*{user.role}">
-                    <option value="">Role</option>
-                    <option th:each="roles : ${T(com.jaab.revature.model.Role).values()}"
-                    th:value="${roles}" th:text="${roles}"></option>
-                </select>
-            </label>
-        </div>
-        <div>
-            <button type="submit">Register</button>
+        <div class="card">
+            <div id="name">
+                <label>
+                    <input type="text" placeholder="First Name" minlength="2" maxlength="20"
+                           th:field="*{user.firstName}">
+                </label>
+                <label>
+                    <input type="text" placeholder="Last Name" minlength="2" maxlength="40" th:field="*{user.lastName}">
+                </label>
+            </div>
+            <div id="login">
+                <label>
+                    <input type="email" placeholder="Email" th:field="*{user.email}">
+                </label>
+                <label>
+                    <input type="text" placeholder="Password" minlength="10" maxlength="100"
+                           th:field="*{user.password}">
+                </label>
+            </div>
+            <div id="employee-info">
+                <label>
+                    <select th:field="*{user.department}">
+                        <option value="">Department</option>
+                        <option th:each="departments : ${T(com.jaab.revature.model.Department).values()}"
+                                th:value="${departments}" th:text="${departments}"></option>
+                    </select>
+                </label>
+                <label>
+                    <select th:field="*{user.supervisor}">
+                        <option value="">Supervisor</option>
+                        <option th:each="admins : ${adminUsers}"
+                                th:value="|${admins.getFirstName()} ${admins.getLastName()}|"
+                                th:text="|${admins.getFirstName()} ${admins.getLastName()}|"></option>
+                    </select>
+                </label>
+                <label>
+                    <select th:field="*{user.role}">
+                        <option value="">Role</option>
+                        <option th:each="roles : ${T(com.jaab.revature.model.Role).values()}"
+                                th:value="${roles}" th:text="${roles}"></option>
+                    </select>
+                </label>
+            </div>
+            <div>
+                <button type="submit">Register</button>
+            </div>
         </div>
     </form>
 </body>

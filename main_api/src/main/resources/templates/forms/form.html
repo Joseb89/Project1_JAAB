@@ -7,39 +7,42 @@
 </head>
 <body>
 <form th:action="@{/employee/{id}(id=${form.getEmployee().getEmployeeId()})}" th:object="${form}" method="post">
-    <div id="name">
-      <label>First Name:
-        <input type="hidden" th:text="${form.getFirstName()}">
-      </label>
-      <label>Last Name:
-          <input type="hidden" th:text="${form.getLastName()}">
-      </label>
+    <div class="card">
+        <div id="name">
+            <label>First Name:
+                <input type="hidden" th:text="${form.getFirstName()}">
+            </label>
+            <label>Last Name:
+                <input type="hidden" th:text="${form.getLastName()}">
+            </label>
+        </div>
+        <div id="department-info">
+            <label>Department:
+                <input type="hidden" th:text="${form.getDepartment()}">
+            </label>
+            <label>Supervisor:
+                <input type="hidden" th:text="${form.getSupervisor()}">
+            </label>
+        </div>
+        <div class="form-input">
+            <label>Category:
+                <select th:field="*{requestTopic}">
+                    <option th:value="'New Equipment'">New Equipment</option>
+                    <option th:value="'Break/Fix'">Break/Fix</option>
+                    <option th:value="'Medical'">Medical</option>
+                    <option th:value="'Other'">Other</option>
+                </select>
+            </label>
+            <label>
+                <textarea cols="30" rows="10" maxlength="100" placeholder="Reason"
+                          th:field="*{requestReason}"></textarea>
+            </label>
+            <label>Cost:
+                <input type="number" th:field="*{cost}">
+            </label>
+            <button type="submit">Submit</button>
+        </div>
     </div>
-   <div id="department-info">
-      <label>Department:
-          <input type="hidden" th:text="${form.getDepartment()}">
-      </label>
-      <label>Supervisor:
-          <input type="hidden" th:text="${form.getSupervisor()}">
-      </label>
-   </div>
-   <div id="form-input">
-       <label>Category:
-          <select th:field="*{requestTopic}">
-              <option th:value="'New Equipment'">New Equipment</option>
-              <option th:value="'Break/Fix'">Break/Fix</option>
-              <option th:value="'Medical'">Medical</option>
-              <option th:value="'Other'">Other</option>
-          </select>
-      </label>
-      <label>
-          <textarea cols="30" rows="10" maxlength="100" placeholder="Reason" th:field="*{requestReason}"></textarea>
-      </label>
-      <label>Cost
-          <input type="number" th:field="*{cost}">
-      </label>
-       <button type="submit">Submit</button>
-   </div>
 </form>
 </body>
 </html>

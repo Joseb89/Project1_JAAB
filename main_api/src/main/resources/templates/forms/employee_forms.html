@@ -7,16 +7,16 @@
 </head>
 <body>
 <form method="get">
-    <table>
-        <tr>
-            <th>Forms</th>
-        </tr>
-        <tr th:each="form: ${forms}">
-            <td><a th:href="@{/admin/approveForm/{id}(id=${form.getFormId()})}"
-                   th:text="|${form.getFormId()} ${form.getFirstName()} ${form.getLastName()}
+    <h1>Forms</h1>
+    <div class="card">
+        <table>
+            <tr th:each="form: ${forms}">
+                <td><a th:href="@{/admin/approveForm/{id}(id=${form.getFormId()})}"
+                       th:text="|${form.getFormId()} ${form.getFirstName()} ${form.getLastName()}
                    ${form.getRequestReason()}|"></a></td>
-        </tr>
-    </table>
+            </tr>
+        </table>
+    </div>
 </form>
 </body>
 </html>

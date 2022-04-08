@@ -8,7 +8,7 @@ create table if not exists reimburse.forms (
 	request_date DATE not null,
 	request_topic VARCHAR(15) not null,
 	request_reason VARCHAR,
-	request_cost numeric (5,2),
+	request_cost numeric (5,2) not null,
 	request_status VARCHAR(8)
 );
 

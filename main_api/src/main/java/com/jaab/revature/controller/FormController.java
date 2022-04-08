@@ -37,8 +37,10 @@ public class FormController {
     @GetMapping("employee/{employeeId}")
     public String loadForm(Model model, @PathVariable Integer employeeId){
         Form form = new Form();
+        User employee = userService.getUserById(employeeId);
         formService.loadForm(form, employeeId);
         model.addAttribute("form", form);
+        model.addAttribute("employee", employee);
         return "forms/form";
     }
 
@@ -47,14 +49,17 @@ public class FormController {
                                                    @PathVariable Integer employeeId) throws IOException {
         int id = formService.createForm(form, employeeId);
         FormDTO formDTO = formService.getFormById(id);
-        Mono<FormDTO> email = sendEmail(formDTO, "/admin/email");
+        Mono<FormDTO> email = sendEmail(formDTO, "/adminEmail");
         response.sendRedirect("/employee/submittedForm/" + formDTO.getFormId());
         return ResponseEntity.ok(email);
     }
 
     @GetMapping("employee/submittedForm/{formId}")
     public String submitForm(Model model, @PathVariable Integer formId) {
-        showForm(formId, model);
+        FormDTO formDTO = formService.getFormById(formId);
+        User employee = userService.getUserById(formDTO.getEmployeeId());
+        model.addAttribute("formDTO", formDTO);
+        model.addAttribute("employee", employee);
         return "forms/submitted_form";
     }
 
@@ -62,20 +67,23 @@ public class FormController {
     public String loadAdminHome(Model model, @PathVariable Integer employeeId) {
         User admin = userService.getUserById(employeeId);
         Set<UserDTO> employees = userService.getUsersBySupervisor(admin.getFirstName() + " " + admin.getLastName());
+        model.addAttribute("admin", admin);
         model.addAttribute("employees", employees);
         return "users/admin_home";
     }
 
     @GetMapping("admin/forms/{employeeId}")
     public String getFormsByEmployeeId(Model model, @PathVariable Integer employeeId){
+        UserDTO admin = userService.getAdminByEmployeeId(employeeId);
         Set<FormDTO> forms = formService.getFormsByEmployeeId(employeeId);
+        model.addAttribute("admin", admin);
         model.addAttribute("forms", forms);
         return "forms/employee_forms";
     }
 
     @GetMapping("admin/approveForm/{formId}")
     public String formStatus(Model model, @PathVariable Integer formId){
-        showForm(formId, model);
+        getAdminAndForm(formId, model);
         return "forms/approve_form";
     }
 
@@ -85,14 +93,14 @@ public class FormController {
                                                     @PathVariable Integer formId) throws IOException {
         formService.updateStatus(formId, formDTO.getRequestStatus());
         FormDTO updatedForm = formService.getFormById(formDTO.getFormId());
-        Mono<FormDTO> email = sendEmail(updatedForm, "/employee/email");
+        Mono<FormDTO> email = sendEmail(updatedForm, "/employeeEmail");
         response.sendRedirect("/admin/updatedForm/" + formDTO.getFormId());
         return ResponseEntity.ok(email);
     }
 
     @GetMapping("admin/updatedForm/{formId}")
     public String getUpdatedForm(Model model, @PathVariable Integer formId){
-        showForm(formId, model);
+        getAdminAndForm(formId, model);
         return "forms/form_status";
     }
 
@@ -110,8 +118,10 @@ public class FormController {
                 .bodyToMono(FormDTO.class);
     }
 
-    private void showForm(Integer formId, Model model){
+    private void getAdminAndForm(Integer formId, Model model) {
         FormDTO formDTO = formService.getFormById(formId);
+        UserDTO admin = userService.getAdminByEmployeeId(formDTO.getEmployeeId());
         model.addAttribute("formDTO", formDTO);
+        model.addAttribute("admin", admin);
     }
 }

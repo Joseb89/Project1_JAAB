@@ -13,7 +13,7 @@ form {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 95vh;
 }
 
 div {
@@ -98,4 +98,27 @@ textarea {
 .form-input {
     flex-direction: column;
     align-items: center;
+}
+
+.logout {
+    flex-direction: row;
+    height: 5vh;
+    background: springgreen;
+    padding: 1rem;
+}
+
+.logout label {
+    font-family: fantasy;
+    font-size: 1.8rem;
+}
+
+.logout-button {
+    background: crimson;
+    color: beige;
+    text-align: center;
+    line-height: 2;
+}
+
+.logout-button:hover {
+    background: blue;
 }

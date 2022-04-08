@@ -11,4 +11,6 @@ create table if not exists reimburse.users (
 
 select * from reimburse.users u;
 
-update reimburse.users set user_email = 'laxepo7621@xasems.com' where employee_id = 4; 
+update reimburse.users set user_email = 'pevix52506@yeafam.com' where employee_id = 8;
+
+drop table if exists reimburse.users;

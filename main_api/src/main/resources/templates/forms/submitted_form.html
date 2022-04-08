@@ -6,6 +6,12 @@
     <link th:href="@{/css/styles.css}" rel="stylesheet">
 </head>
 <body>
+<form class="logout" th:action="@{/logout}" method="post">
+    <label>
+        <input type="hidden" th:text="|${employee.getFirstName()} ${employee.getLastName()}|">
+    </label>
+    <button type="submit" class="logout-button">Logout</button>
+</form>
 <form th:action="@{/employee/submittedForm/{id}(id=${formDTO.getFormId()})}" method="get">
     <div class="card">
         <div id="name">

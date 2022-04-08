@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "email.port",
+      "type": "java.lang.String",
+      "description": "Description for email.port."
+    },
+    {
+      "name": "email.security.enabled",
+      "type": "java.lang.String",
+      "description": "Description for email.security.enabled."
+    }
+  ] }

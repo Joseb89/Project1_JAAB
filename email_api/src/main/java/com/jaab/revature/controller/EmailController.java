@@ -18,7 +18,7 @@ public class EmailController {
         this.emailService = emailService;
     }
 
-    @PostMapping("/admin/email")
+    @PostMapping("/adminEmail")
     public void sendEmailToAdmin(@RequestBody FormDTO formDTO){
 
         try {
@@ -28,7 +28,7 @@ public class EmailController {
         }
     }
 
-    @PostMapping("/employee/email")
+    @PostMapping("/employeeEmail")
     public void sendEmailToEmployee(@RequestBody FormDTO formDTO){
 
         try {

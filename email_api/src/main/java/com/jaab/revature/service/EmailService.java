@@ -21,7 +21,6 @@ public class EmailService {
     }
 
     public void sendAdminEmail(FormDTO formDTO) throws MailException {
-
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(getEmail(formDTO, "/adminEmail/"));
         mailMessage.setSubject("New Reimbursement Request");

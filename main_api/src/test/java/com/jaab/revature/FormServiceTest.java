@@ -22,14 +22,14 @@ public class FormServiceTest {
 
     @BeforeEach
     public void init(){
-        formDTO = formService.getFormById(12);
-        employeeForms = formService.getFormsByEmployeeId(7);
+        formDTO = formService.getFormById(16);
+        employeeForms = formService.getFormsByEmployeeId(8);
     }
 
     @Test
     public void loadFormTest_Success() {
         Form form = new Form();
-        formService.loadForm(form, 7);
+        formService.loadForm(form, 3);
         Assertions.assertEquals(form.getFirstName(), "Wynne");
     }
 
@@ -58,12 +58,12 @@ public class FormServiceTest {
     @Test
     public void getFormsByEmployeeIdTest_Success() {
         for (FormDTO form : employeeForms)
-            Assertions.assertEquals("Wynne", form.getFirstName());
+            Assertions.assertEquals("Solas", form.getFirstName());
     }
 
     @Test
     public void getFormsByEmployeeIdTest_Fail() {
         for (FormDTO form : employeeForms)
-            Assertions.assertNotEquals("Chainbreaker", form.getLastName());
+            Assertions.assertNotEquals("Vallen", form.getLastName());
     }
 }

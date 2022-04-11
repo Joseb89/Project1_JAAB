@@ -9,6 +9,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -36,7 +37,8 @@ public class FormControllerTest {
     }
 
     @Test
-    public void loadFormTest() throws Exception {
+    @WithMockUser(username = "dreadwolf@yahoo.com", roles = "EMPLOYEE")
+    public void loadFormTest_Success() throws Exception {
         int employeeId = 8;
 
         mockMvc.perform(MockMvcRequestBuilders
@@ -47,8 +49,18 @@ public class FormControllerTest {
     }
 
     @Test
-    public void loadAdminHomeTest() throws Exception {
-        int adminId = 3;
+    public void loadFormTest_Fail() throws Exception {
+        int employeeId = 6;
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/employee/" + employeeId))
+                        .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
+    }
+
+    @Test
+    @WithMockUser(username = "championofkirkwall@gmail.com", roles = "ADMIN")
+    public void loadAdminHomeTest_Success() throws Exception {
+        int adminId = 4;
 
         mockMvc.perform(MockMvcRequestBuilders
                 .get("/admin/" + adminId))
@@ -58,8 +70,18 @@ public class FormControllerTest {
     }
 
     @Test
-    public void getFormsByEmployeeIdTest() throws Exception {
-        int employeeId = 7;
+    public void loadAdminHomeTest_Fail() throws Exception {
+        int adminId = 4;
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/admin/" + adminId))
+                        .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
+    }
+
+    @Test
+    @WithMockUser(username = "heroofferelden@yahoo.com", roles = "ADMIN")
+    public void getFormsByEmployeeIdTest_Success() throws Exception {
+        int employeeId = 2;
 
         mockMvc.perform(MockMvcRequestBuilders
                 .get("/admin/forms/" + employeeId))
@@ -69,13 +91,32 @@ public class FormControllerTest {
     }
 
     @Test
-    public void formStatusTest() throws Exception {
-        int formId = 26;
+    public void getFormsByEmployeeIdTest_Fail() throws Exception {
+        int employeeId = 2;
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/admin/forms/" + employeeId))
+                        .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
+    }
+
+    @Test
+    @WithMockUser(username = "grandinquisitor@gmail.com", roles = "ADMIN")
+    public void formStatusTest_Success() throws Exception {
+        int formId = 16;
 
         mockMvc.perform(MockMvcRequestBuilders
                 .get("/admin/approveForm/" + formId))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("forms/approve_form"))
                 .andExpect(MockMvcResultMatchers.model().attributeExists("formDTO"));
+    }
+
+    @Test
+    public void formStatusTest_Fail() throws Exception {
+        int formId = 16;
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/admin/approveForm/" + formId))
+                        .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
     }
 }

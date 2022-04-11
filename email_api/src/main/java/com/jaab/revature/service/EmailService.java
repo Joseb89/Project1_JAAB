@@ -8,6 +8,10 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+/**
+ * This class is a service to prepare an email for sending from data to either an admin or employee from the main api.
+ * @author Joseph Barr
+ */
 @Service
 public class EmailService {
 
@@ -20,6 +24,11 @@ public class EmailService {
         this.webClient = webClientBuilder.baseUrl("http://localhost:8080").build();
     }
 
+    /**
+     * Prepares and sends an email to an admin user
+     * @param formDTO - The form data to be emailed
+     * @throws MailException if email cannot be composed
+     */
     public void sendAdminEmail(FormDTO formDTO) throws MailException {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(getEmail(formDTO, "/adminEmail/"));
@@ -30,6 +39,11 @@ public class EmailService {
         javaMailSender.send(mailMessage);
     }
 
+    /**
+     * Prepares and sends an email to an employee
+     * @param formDTO - The form data to be emailed
+     * @throws MailException if email cannot be composed
+     */
     public void sendEmployeeEmail(FormDTO formDTO) throws MailException {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(getEmail(formDTO, "/employeeEmail/"));
@@ -41,6 +55,12 @@ public class EmailService {
 
     }
 
+    /**
+     * Retrieves the user's email address from the main api
+     * @param formDTO - the submitted form which contains the user's id
+     * @param uri - the REST endpoint to call
+     * @return - user's email address
+     */
     private String getEmail(FormDTO formDTO, String uri) {
         return
                 webClient.get()

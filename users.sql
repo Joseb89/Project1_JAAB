@@ -9,8 +9,8 @@ create table if not exists reimburse.users (
 	user_role VARCHAR(13) not null
 );
 
-select * from reimburse.users u;
+select * from reimburse.users u order by employee_id;
 
-update reimburse.users set user_email = 'pevix52506@yeafam.com' where employee_id = 8;
+update reimburse.users set user_email = 'guardianofhawke@yahoo.com' where employee_id = 5;
 
 drop table if exists reimburse.users;

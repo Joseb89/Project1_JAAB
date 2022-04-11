@@ -37,12 +37,12 @@ public class ServiceControllerTest {
 
     @Test
     public void getEmployeeEmailTest() throws Exception {
-        int employeeId = 5;
+        int employeeId = 8;
 
         mockMvc.perform(MockMvcRequestBuilders
                 .get("/employeeEmail/" + employeeId))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string("bringerofjustice@yahoo.com"));
+                .andExpect(MockMvcResultMatchers.content().string("dreadwolf@yahoo.com"));
     }
 
     @Test
@@ -52,6 +52,6 @@ public class ServiceControllerTest {
         mockMvc.perform(MockMvcRequestBuilders
                 .get("/adminEmail/" + employeeId))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string("grandinquisitor@aol.com"));
+                .andExpect(MockMvcResultMatchers.content().string("grandinquisitor@gmail.com"));
     }
 }

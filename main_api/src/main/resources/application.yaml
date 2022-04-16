@@ -8,7 +8,7 @@ spring:
   datasource:
     username: postgres
     password: Elessar1989!
-    url: jdbc:postgresql://34.69.191.73:5432/project1_jaab
+    url: jdbc:postgresql://35.192.3.233:5432/project1-jaab
     driver-class-name: org.postgresql.Driver
 
   jpa:

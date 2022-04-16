@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  mainapi:
+    build: ./main_api
+    image: joseb89/project1jaab-mainapi:v3
+    ports:
+      - "8080:8080"
+    container_name: mainapi
+    restart: on-failure
+  emailapi:
+    build: ./email_api
+    image: joseb89/project1jaab-emailapi:v2
+    ports:
+      - "8081:8081"
+    container_name: emailapi
+    restart: on-failure
+

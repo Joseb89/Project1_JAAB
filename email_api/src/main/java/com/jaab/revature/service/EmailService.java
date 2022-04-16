@@ -21,7 +21,7 @@ public class EmailService {
     @Autowired
     public EmailService(JavaMailSender javaMailSender, WebClient.Builder webClientBuilder) {
         this.javaMailSender = javaMailSender;
-        this.webClient = webClientBuilder.baseUrl("http://localhost:8080").build();
+        this.webClient = webClientBuilder.baseUrl("http://mainapi:8080").build();
     }
 
     /**

@@ -31,7 +31,7 @@ public class FormController {
     public FormController(FormService formService, UserService userService, WebClient.Builder webClientBuilder) {
         this.formService = formService;
         this.userService = userService;
-        this.webClient = webClientBuilder.baseUrl("http://localhost:8081").build();
+        this.webClient = webClientBuilder.baseUrl("http://emailapi:8081").build();
     }
 
     @GetMapping("employee/{employeeId}")
